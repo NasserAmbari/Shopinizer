@@ -36,6 +36,11 @@ https://shopinizer.vercel.app/
 https://github.com/NasserAmbari/Shopinizer.git
 ```
 
+## Feedback
+
+I welcome and appreciate your feedback on this project. Your input is valuable and helps me improve and refine the application. Here’s how you can provide feedback or get in touch:
+
+
 **Install the project using NPM**
 
 ```bash
@@ -64,3 +69,15 @@ API Documentation written in swagger.js you can check all in
 ```bash
 https://shopinizer.vercel.app/documentation/
 ```
+
+## Feedback
+
+I’d love to hear your thoughts on this project! Your feedback means the world to me and helps me make the application even better. If you’ve got ideas, suggestions, or just want to chat, here’s how you can reach out:
+
+### Contact
+
+For any direct feedback, questions, or general inquiries, you can reach me at:
+
+-   **LinkedIn:** [My Linkedin Profile](https://www.linkedin.com/in/nasserambari/))
+
+Thank you for your interest in my project and for taking the time to provide feedback!
