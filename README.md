@@ -76,8 +76,9 @@ I’d love to hear your thoughts on this project! Your feedback means the world 
 
 ### Contact
 
-For any direct feedback, questions, or general inquiries, you can reach me at:
+For any direct feedback, questions, or maybe we can work Together :D, you can reach me at:
 
--   **LinkedIn:** [My Linkedin Profile](https://www.linkedin.com/in/nasserambari/))
+-   **LinkedIn:** [My Linkedin Profile](https://www.linkedin.com/in/nasserambari/)
+-   **Instagram:** [My Linkedin Profile](https://www.instagram.com/nasser_ambari/)
 
 Thank you for your interest in my project and for taking the time to provide feedback!
