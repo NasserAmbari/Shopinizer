@@ -3,20 +3,32 @@ import { Request, Response } from "express";
 import {
 	create,
 	findAll,
+	findAllByUser,
 	findOne,
-	update,
 	remove,
 } from "../services/OrderService";
-import { IPaginationQuery } from "../utils/interfaces";
+import { IPaginationQuery, IReqUser, IReqProduct } from "../utils/interfaces";
 import * as Yup from "yup";
 
 export default {
 	async create(req: Request, res: Response) {
-		console.log(req.body);
-		console.log("anjr");
-		throw new Error();
+		/**
+		#swagger.tags = ['Orders']
+		#swagger.security = [{
+		"bearerAuth": []
+		}]
+		
+		#swagger.requestBody = {
+			required: true,
+			schema: {
+				$ref: "#/components/schemas/OrderCreateRequest"
+			}
+		}
+		*/
 		try {
-			const result = await create(req.body);
+			const createdBy = (req as IReqUser).user.id;
+			const { orderItems } = req.body
+			const result = await create(orderItems, createdBy);
 			res.status(201).json({
 				data: result,
 				message: "Success create Order",
@@ -31,6 +43,10 @@ export default {
 	},
 
 	async findAll(req: Request, res: Response) {
+		/**
+		#swagger.tags = ['Orders']
+		
+		*/
 		try {
 			const {
 				limit = 10,
@@ -59,7 +75,42 @@ export default {
 		}
 	},
 
+	async findAllByUser(req: Request, res: Response) {
+		/**
+		#swagger.tags = ['Orders']
+		#swagger.security = [{
+			"bearerAuth": []
+		}]
+		*/
+		try {
+			const userId = (req as IReqUser).user.id;
+			const {
+				limit = 10,
+				page = 1,
+				search,
+			} = req.query as unknown as IPaginationQuery;
+
+			const result = await findAllByUser(limit, page, userId);
+			res.status(200).json({
+				data: result,
+				message: "Success get all Orders",
+			});
+		} catch (error) {
+			const err = error as Error;
+			res.status(500).json({
+				data: err.message,
+				message: "Failed get all Orders",
+			});
+		}
+	},
+
 	async findOne(req: Request, res: Response) {
+		/**
+		#swagger.tags = ['Orders']
+		#swagger.security = [{
+			"bearerAuth": []
+		}]
+		*/
 		try {
 			const result = await findOne(req.params?.id);
 
@@ -76,24 +127,13 @@ export default {
 		}
 	},
 
-	async update(req: Request, res: Response) {
-		try {
-			const result = await update(req.params?.id, req.body);
-
-			res.status(200).json({
-				data: result,
-				message: "Success update Order",
-			});
-		} catch (error) {
-			const err = error as Error;
-			res.status(500).json({
-				data: err.message,
-				message: "Failed update Order",
-			});
-		}
-	},
-
 	async delete(req: Request, res: Response) {
+		/**
+		#swagger.tags = ['Orders']
+		#swagger.security = [{
+			"bearerAuth": []
+		}]
+		*/
 		try {
 			const result = await remove(req.params?.id);
 

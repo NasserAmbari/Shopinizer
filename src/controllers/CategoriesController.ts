@@ -11,6 +11,16 @@ import { IPaginationQuery } from "../utils/interfaces";
 export default {
   
   async create(req: Request, res: Response) {
+    /**
+    #swagger.tags = ['Categories']
+    #swagger.requestBody = {
+    	required: true,
+     	schema:{
+          "name": "Kendaraan",
+          "description": "Mobilmu apa yok ?"
+      }
+    }
+    */
     try {
       const result = await create(req.body);
       res.status(201).json({
@@ -27,6 +37,9 @@ export default {
   },
 
   async findAll(req: Request, res: Response) {
+    /**
+      #swagger.tags = ['Categories']
+    */
     try {
      const {
         limit = 10,
@@ -59,6 +72,9 @@ export default {
   },
 
   async findOne(req: Request, res: Response) {
+    /**
+    #swagger.tags = ['Categories']
+    */
     try {
       const result = await findOne(req.params?.id);
 
@@ -83,6 +99,19 @@ export default {
   },
 
   async update(req: Request, res: Response) {
+    /**
+    #swagger.tags = ['Categories']
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+    #swagger.requestBody = {
+      required: true,
+	    schema:{
+        "name": "Kendaraan",
+        "description": "Mobilmu apa yok ?"
+      }
+    }
+    */
     try {
       const result = await update(req.params?.id, req.body);
 
@@ -101,6 +130,12 @@ export default {
   },
   
   async delete(req: Request, res: Response) {
+    /**
+    #swagger.tags = ['Categories']
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+    */
     try {
       const result = await remove(req.params?.id);
 

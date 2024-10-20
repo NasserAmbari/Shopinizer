@@ -37,6 +37,15 @@ interface IRequestRegister extends Request {
 
 export default {
 	async login(req: IRequestLogin, res: Response) {
+	/**
+    #swagger.tags = ['Auth']
+    #swagger.requestBody = {
+    	required: true,
+     	schema: {
+        	$ref: "#/components/schemas/LoginRequest"
+    	}
+    }
+    */
 		try {
 			const { email, password } = req.body;
 			await loginSchema.validate({ email, password });
@@ -53,7 +62,17 @@ export default {
 			});
 		}
 	},
+	
 	async register(req: IRequestRegister, res: Response) {
+		/**
+		#swagger.tags = ['Auth']
+		#swagger.requestBody = {
+			required: true,
+			schema: {
+				$ref: "#/components/schemas/RegisterRequest"
+			}
+		}
+		*/
 		try {
 			const {
 				email,
@@ -93,7 +112,14 @@ export default {
 			});
 		}
 	},
+
 	async me(req: IRequestWithUser, res: Response) {
+		/**
+		#swagger.tags = ['Auth']
+		#swagger.security = [{
+			"bearerAuth": []
+		}]
+		*/
 		try {
 			const id = req.user?.id;
 			const user = await UserModel.findById(id);
@@ -117,6 +143,17 @@ export default {
 		}
 	},
 	async updateProfile(req: IRequestWithUser, res: Response) {
+		/**
+	 	#swagger.tags = ['Auth']
+		#swagger.requestBody = {
+			required: true,
+				schema: {$ref: "#/components/schemas/UpdateProfileRequest"}
+		}
+			
+		#swagger.security = [{
+			"bearerAuth": []
+		}]
+		*/
 		try {
 			const id = req.user?.id;
 			const result = await updateProfile(
