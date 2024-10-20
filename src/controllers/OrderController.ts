@@ -313,49 +313,50 @@ export default {
 
 	async findOne(req: Request, res: Response) {
 		/**
-	#swagger.parameters['id'] = {
-		in: 'path',
-		description: 'ID order yang ingin diambil',
-		required: true,
-		type: 'string'
-	}
-   	#swagger.responses[200] = {
-      	description: "Detail order berhasil didapatkan",
-      	content: {
-         	"application/json": {
-            	schema: {
-					type: "object",
-					properties: {
-						data: {
-							type: "object",
-							properties: {
-								_id: { type: "string" },
-								grandTotal: { type: "number" },
-								orderItems: {
-								type: "array",
-								items: {
-									type: "object",
-									properties: {
-										name: { type: "string" },
-										productId: { type: "string" },
-										price: { type: "number" },
-										qty: { type: "number" },
-										_id: { type: "string" }
+		#swagger.tags = ['Orders']
+		#swagger.parameters['id'] = {
+			in: 'path',
+			description: 'ID order yang ingin diambil',
+			required: true,
+			type: 'string'
+		}
+		#swagger.responses[200] = {
+			description: "Detail order berhasil didapatkan",
+			content: {
+				"application/json": {
+					schema: {
+						type: "object",
+						properties: {
+							data: {
+								type: "object",
+								properties: {
+									_id: { type: "string" },
+									grandTotal: { type: "number" },
+									orderItems: {
+									type: "array",
+									items: {
+										type: "object",
+										properties: {
+											name: { type: "string" },
+											productId: { type: "string" },
+											price: { type: "number" },
+											qty: { type: "number" },
+											_id: { type: "string" }
+										}
 									}
-								}
-							},
-							createdBy: { type: "string" },
-							status: { type: "string" },
-							createdAt: { type: "string", format: "date-time" },
-							updatedAt: { type: "string", format: "date-time" }
+								},
+								createdBy: { type: "string" },
+								status: { type: "string" },
+								createdAt: { type: "string", format: "date-time" },
+								updatedAt: { type: "string", format: "date-time" }
+							}
+						},
+						message: { type: "string" }
 						}
-					},
-					message: { type: "string" }
-					}
-            	}	
-         	}
-      	}
-   	}
+					}	
+				}
+			}
+		}
 		*/
 		try {
 			const result = await findOne(req.params?.id);
