@@ -29,3 +29,38 @@ https://shopinizer.vercel.app/
 ```
 
 ### Running Locally
+
+**You can clone this project on your local machine 
+
+```bash
+https://github.com/NasserAmbari/Shopinizer.git
+```
+
+**Install the project using NPM**
+
+```bash
+npm install
+```
+**Set Up Environment Variables**
+
+Create a `.env` file in the root of the project and add the required environment variables. You can use the provided `.env.example` as a reference:
+
+```bash
+cp .env.example .env
+```
+
+**Try to Run the Application**
+
+Start the server:
+```bashgit 
+npm run dev
+```
+
+## API Documentation
+
+API Documentation written in swagger.js you can check all in 
+
+**Base URL**
+```bash
+https://shopinizer.vercel.app/documentation/
+```
