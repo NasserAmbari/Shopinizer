@@ -3,8 +3,8 @@ import swaggerAutogen from "swagger-autogen";
 const doc = {
     info: {
       version: "v0.0.1",
-      title: "Dokumentasi API BukaToko",
-      description: "Dokumentasi API BukaToko",
+      title: "Dokumentasi API Shopinizer",
+      description: "Dokumentasi API Shopinizer",
     },
     servers: [
       {

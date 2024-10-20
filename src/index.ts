@@ -22,10 +22,9 @@ async function init() {
 
 		app.use("/api/v1", routes);
 		docs(app);
-
+    
 		app.use(errorNotFoundMiddleware);
 		app.use(errorServerMiddleware);
-
 
 		app.listen(PORT, () => {
 			console.log(`Server is running at http://localhost:${PORT}`);
