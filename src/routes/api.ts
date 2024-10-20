@@ -29,11 +29,11 @@ router.get("/products/:id", productsController.findOne);
 router.put("/products/:id", productsController.update);
 router.delete("/products/:id", productsController.delete);
 
-router.get("/orders", orderController.findAll);
-router.post("/orders", orderController.create);
-router.get("/orders/:id", orderController.findOne);
-router.put("/orders/:id", orderController.update);
-router.delete("/orders/:id", orderController.delete);
+router.get("/orders", [authMiddleware], orderController.findAll);
+router.post("/orders", [authMiddleware],orderController.create);
+router.get("/orders/user", [authMiddleware], orderController.findAllByUser);
+router.get("/orders/:id", [authMiddleware],orderController.findOne);
+router.delete("/order", [authMiddleware], orderController.delete);
 
 router.post("/upload", uploadMiddleware.single, uploadController.single);
 router.post("/uploads", uploadMiddleware.multiple, uploadController.multiple);

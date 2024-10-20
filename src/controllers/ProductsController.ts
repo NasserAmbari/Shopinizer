@@ -13,6 +13,19 @@ import * as Yup from "yup";
 export default {
 
   async create(req: Request, res: Response) {
+    /**
+    #swagger.tags = ['Products']
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+     
+    #swagger.requestBody = {
+      required: true,
+      schema: {
+        $ref: "#/components/schemas/ProductCreateRequest"
+      }
+    }
+    */
     try {
       await createValidationSchema.validate(req.body);
       const result = await create(req.body);
@@ -30,6 +43,9 @@ export default {
   },
 
   async findAll(req: Request, res: Response) {
+    /**
+    #swagger.tags = ['Products']
+    */
     try {
       const {
         limit = 10,
@@ -59,6 +75,9 @@ export default {
   },
 
   async findOne(req: Request, res: Response) {
+    /**
+    #swagger.tags = ['Products']
+    */
     try {
       const result = await findOne(req.params?.id);
 
@@ -76,6 +95,18 @@ export default {
   },
 
   async update(req: Request, res: Response) {
+    /**
+    #swagger.tags = ['Products']
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+    #swagger.requestBody = {
+      required: true,
+      schema: {
+        $ref: "#/components/schemas/ProductCreateRequest"
+      }
+    }
+    */
     try {
       const result = await update(req.params?.id, req.body);
 
@@ -93,6 +124,12 @@ export default {
   },
 
   async delete(req: Request, res: Response) {
+    /**
+    #swagger.tags = ['Products']
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+    */
     try {
       const result = await remove(req.params?.id);
 
