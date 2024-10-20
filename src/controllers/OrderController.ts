@@ -13,17 +13,77 @@ import * as Yup from "yup";
 export default {
 	async create(req: Request, res: Response) {
 		/**
-		#swagger.tags = ['Orders']
-		#swagger.security = [{
-		"bearerAuth": []
-		}]
-		
-		#swagger.requestBody = {
-			required: true,
-			schema: {
-				$ref: "#/components/schemas/OrderCreateRequest"
+			#swagger.tags = ['Orders']
+
+			#swagger.security = [{
+				"bearerAuth": []
+			}]
+
+			#swagger.requestBody = {
+				required: true,
+				content: {
+					"application/json": {
+						schema: {
+							type: "object",
+							properties: {
+							grandTotal: { type: "number" },
+							orderItems: {
+								type: "array",
+								items: {
+								type: "object",
+								properties: {
+									name: { type: "string" },
+									productId: { type: "string" },
+									price: { type: "number" },
+									qty: { type: "number" },
+								}
+								}
+							},
+							createdBy: { type: "string" },
+							status: { type: "string" }
+							}
+						}
+					}
+				}
 			}
-		}
+
+			#swagger.responses[201] = {
+			description: "Order created successfully",
+				content: {
+					"application/json": {
+						schema: {
+							type: "object",
+							properties: {
+							data: {
+								type: "object",
+								properties: {
+								_id: { type: "string" },
+								grandTotal: { type: "number" },
+								orderItems: {
+									type: "array",
+									items: {
+									type: "object",
+									properties: {
+										name: { type: "string" },
+										productId: { type: "string" },
+										price: { type: "number" },
+										qty: { type: "number" },
+										_id: { type: "string" }
+									}
+									}
+								},
+								createdBy: { type: "string" },
+								status: { type: "string" },
+								createdAt: { type: "string", format: "date-time" },
+								updatedAt: { type: "string", format: "date-time" }
+								}
+							},
+							message: { type: "string" }
+							}
+						}
+					}
+				}
+			}
 		*/
 		try {
 			const createdBy = (req as IReqUser).user.id;
@@ -45,7 +105,88 @@ export default {
 	async findAll(req: Request, res: Response) {
 		/**
 		#swagger.tags = ['Orders']
-		
+
+		#swagger.security = [{
+			"bearerAuth": []
+		}]
+
+		#swagger.parameters['limit'] = {
+			in: 'query',
+			type: 'integer',
+			description: 'Jumlah item yang ditampilkan per halaman',
+			required: false,
+			default: 10
+		}
+
+		#swagger.parameters['page'] = {
+			in: 'query',
+			type: 'integer',
+			description: 'Halaman yang diinginkan',
+			required: false,
+			default: 1
+		}
+
+		#swagger.parameters['search'] = {
+			in: 'query',
+			type: 'string',
+			description: 'Cari order berdasarkan nama produk',
+			required: false
+		}
+
+		#swagger.responses[200] = {
+			description: "Daftar orders berhasil didapatkan",
+			content: {
+				"application/json": {
+					schema: {
+						type: "object",
+						properties: {
+						data: {
+							type: "array",
+							items: {
+							type: "object",
+								properties: {
+									_id: { type: "string" },
+									grandTotal: { type: "number" },
+									orderItems: {
+									type: "array",
+									items: {
+										type: "object",
+										properties: {
+										name: { type: "string" },
+										productId: { type: "string" },
+										price: { type: "number" },
+										qty: { type: "number" },
+										_id: { type: "string" }
+										}
+									}
+									},
+									createdBy: { type: "string" },
+									status: { type: "string" },
+									createdAt: { type: "string", format: "date-time" },
+									updatedAt: { type: "string", format: "date-time" }
+								}
+							}
+						},
+						message: { type: "string" }
+						}
+					}
+				}
+			}
+		}
+		#swagger.responses[500] = {
+			description: "Gagal mendapatkan orders",
+			content: {
+				"application/json": {
+					schema: {
+						type: "object",
+						properties: {
+						data: { type: "string" },
+						message: { type: "string" }
+						}
+					}
+				}
+			}
+		}
 		*/
 		try {
 			const {
@@ -77,10 +218,76 @@ export default {
 
 	async findAllByUser(req: Request, res: Response) {
 		/**
-		#swagger.tags = ['Orders']
+	 	#swagger.tags = ['Orders']
+
+		#swagger.description = 'Endpoint untuk mendapatkan semua orders berdasarkan ID pengguna yang terautentikasi.'
+		
 		#swagger.security = [{
 			"bearerAuth": []
 		}]
+
+		#swagger.parameters['limit'] = {
+			in: 'query',
+			type: 'integer',
+			description: 'Jumlah item yang ditampilkan per halaman',
+			required: false,
+			default: 10
+		}
+		#swagger.parameters['page'] = {
+			in: 'query',
+			type: 'integer',
+			description: 'Halaman yang diinginkan',
+			required: false,
+			default: 1
+		}
+		#swagger.parameters['search'] = {
+			in: 'query',
+			type: 'string',
+			description: 'Cari order berdasarkan nama produk',
+			required: false
+		}	
+	
+		#swagger.responses[200] = {
+		description: "Daftar orders untuk pengguna berhasil didapatkan",
+			content: {
+				"application/json": {
+					schema: {
+						type: "object",
+						properties: {
+						data: {
+							type: "array",
+							items: {
+							type: "object",
+								properties: {
+										_id: { type: "string" },
+										grandTotal: { type: "number" },
+										orderItems: {
+										type: "array",
+										items: {
+											type: "object",
+											properties: {
+											name: { type: "string" },
+											productId: { type: "string" },
+											price: { type: "number" },
+											qty: { type: "number" },
+											_id: { type: "string" }
+											}
+										}
+									},
+									createdBy: { type: "string" },
+									status: { type: "string" },
+									createdAt: { type: "string", format: "date-time" },
+									updatedAt: { type: "string", format: "date-time" }
+								}
+							}
+						},
+						message: { type: "string" }
+						}
+					}
+				}
+			}
+		}
+
 		*/
 		try {
 			const userId = (req as IReqUser).user.id;
@@ -106,10 +313,49 @@ export default {
 
 	async findOne(req: Request, res: Response) {
 		/**
-		#swagger.tags = ['Orders']
-		#swagger.security = [{
-			"bearerAuth": []
-		}]
+	#swagger.parameters['id'] = {
+		in: 'path',
+		description: 'ID order yang ingin diambil',
+		required: true,
+		type: 'string'
+	}
+   	#swagger.responses[200] = {
+      	description: "Detail order berhasil didapatkan",
+      	content: {
+         	"application/json": {
+            	schema: {
+					type: "object",
+					properties: {
+						data: {
+							type: "object",
+							properties: {
+								_id: { type: "string" },
+								grandTotal: { type: "number" },
+								orderItems: {
+								type: "array",
+								items: {
+									type: "object",
+									properties: {
+										name: { type: "string" },
+										productId: { type: "string" },
+										price: { type: "number" },
+										qty: { type: "number" },
+										_id: { type: "string" }
+									}
+								}
+							},
+							createdBy: { type: "string" },
+							status: { type: "string" },
+							createdAt: { type: "string", format: "date-time" },
+							updatedAt: { type: "string", format: "date-time" }
+						}
+					},
+					message: { type: "string" }
+					}
+            	}	
+         	}
+      	}
+   	}
 		*/
 		try {
 			const result = await findOne(req.params?.id);
@@ -133,6 +379,44 @@ export default {
 		#swagger.security = [{
 			"bearerAuth": []
 		}]
+		#swagger.description = 'Endpoint untuk menghapus order berdasarkan ID.'
+		#swagger.parameters['id'] = {
+			in: 'path',
+			description: 'ID order yang ingin dihapus',
+			required: true,
+			type: 'string'
+		}
+		#swagger.responses[200] = {
+			description: "Order berhasil dihapus",
+			content: {
+				"application/json": {
+					schema: {
+						type: "object",
+						properties: {
+							data: {
+							type: "string",
+							description: "ID order yang dihapus"
+							},
+							message: { type: "string" }
+						}
+					}
+				}
+			}
+		}
+		#swagger.responses[404] = {
+			description: "Order tidak ditemukan",
+			content: {
+				"application/json": {
+					schema: {
+						type: "object",
+						properties: {
+							data: { type: "string" },
+							message: { type: "string" }
+						}
+					}
+				}
+			}
+		}
 		*/
 		try {
 			const result = await remove(req.params?.id);
