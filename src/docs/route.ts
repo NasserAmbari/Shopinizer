@@ -17,8 +17,8 @@ export default function docs(app: Express) {
 		app.use('/swagger-ui', express.static(join(__dirname, "../../node_modules/swagger-ui-dist")));
 
 		const swaggerCss = readFileSync(
-		join(__dirname, "../../node_modules/swagger-ui-dist/swagger-ui.css"), 
-		"utf-8"
+      join(__dirname, "../../node_modules/swagger-ui-dist/swagger-ui.css"), 
+      "utf-8"
 		);
 
     app.use(
