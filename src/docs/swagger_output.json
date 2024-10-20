@@ -147,19 +147,70 @@
           {
             "name": "limit",
             "in": "query",
+            "description": "Jumlah item yang ditampilkan per halaman",
+            "required": false,
+            "example": 10,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Halaman yang ditampilkan",
+            "required": false,
+            "example": 1,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Pencarian berdasarkan nama kategori",
+            "required": false,
+            "example": "Kendaraan",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "page",
+            "name": "description",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "search",
+            "name": "content",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "createdAt",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "updatedAt",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "message",
             "in": "query",
             "schema": {
               "type": "string"
@@ -168,10 +219,67 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Berhasil mengambil semua kategori",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "description": "ID kategori"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Nama kategori"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "Deskripsi kategori"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "Tanggal dibuat"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "Tanggal diupdate"
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Gagal mengambil kategori",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -296,18 +404,85 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "ID kategori yang ingin diambil"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Berhasil mengambil satu kategori",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "description": "ID kategori"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "Nama kategori"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Deskripsi kategori"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Tanggal dibuat"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Tanggal diupdate"
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Kategori tidak ditemukan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Gagal mengambil kategori",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -323,15 +498,85 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "ID kategori yang ingin  "
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Kategori berhasil  ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "description": "ID kategori"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "Nama kategori"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Deskripsi kategori"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Tanggal dibuat"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Tanggal  "
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Kategori tidak ditemukan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Gagal mengupdate kategori",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "security": [
@@ -344,14 +589,36 @@
           "content": {
             "application/json": {
               "schema": {
-                "name": "Kendaraan",
-                "description": "Mobilmu apa yok ?"
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Kendaraan",
+                    "description": "Nama kategori"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Mobilmu apa yok ?",
+                    "description": "Deskripsi kategori"
+                  }
+                }
               }
             },
             "application/xml": {
               "schema": {
-                "name": "Kendaraan",
-                "description": "Mobilmu apa yok ?"
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Kendaraan",
+                    "description": "Nama kategori"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Mobilmu apa yok ?",
+                    "description": "Deskripsi kategori"
+                  }
+                }
               }
             }
           }
@@ -369,15 +636,62 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "ID kategori yang ingin dihapus"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Kategori berhasil dihapus",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "string",
+                      "description": "ID kategori yang dihapus"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Kategori tidak ditemukan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Gagal menghapus kategori",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "security": [
@@ -1096,6 +1410,9 @@
     },
     "/orders/{id}": {
       "get": {
+        "tags": [
+          "Orders"
+        ],
         "description": "",
         "parameters": [
           {
