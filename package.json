@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.ts",
+    "dev": "ts-node-dev src/index.ts",
+    "start": "ts-node src/index.ts",
+    "dev-start": "nodemon src/index.ts",
     "docs": "ts-node src/docs/swagger.ts",
     "test": "jest",
     "test:watch": "jest --watchAll",
@@ -39,6 +41,7 @@
     "swagger-ui-express": "^5.0.1",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.4.5",
     "yup": "^1.4.0"
   },
